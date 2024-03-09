@@ -18,7 +18,8 @@ interface AppProps {
   maxRunTime: number,
   baseSketchURL: string,
   autosaver?: Autosaver,
-  autoplay?: boolean
+  autoplay?: boolean,
+  libs?: string[],
 }
 
 // Ugh, in practice, not all of these are truly optional, but we need
@@ -146,7 +147,9 @@ export default class App extends PureComponent<AppProps, AppState> {
                        maxRunTime={this.props.maxRunTime}
                        width={this.props.previewWidth}
                        timestamp={this.state.startPlayTimestamp}
-                       onError={this.handlePreviewError} />
+                       onError={this.handlePreviewError}
+                       libs={this.props.libs}
+                        />
             : null}
           </div>
         </div>

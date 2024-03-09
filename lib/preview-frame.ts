@@ -88,12 +88,15 @@ function setBaseURL(url: string) {
 
 function startSketch(sketch: string, p5version: string, maxRunTime: number,
                      loopCheckFuncName: string, baseURL: string,
-                     errorCb: PreviewFrame.ErrorReporter) {
+                     errorCb: PreviewFrame.ErrorReporter, libs?: string[]) {
   let sketchScript = document.createElement('script');
   let loopChecker = LoopChecker(sketch, loopCheckFuncName, maxRunTime);
 
   if (baseURL) {
     setBaseURL(baseURL);
+  }
+  if (!libs) {
+    libs = [];
   }
 
   sketchScript.textContent = sketch;
@@ -117,9 +120,9 @@ function startSketch(sketch: string, p5version: string, maxRunTime: number,
     errorCb(message, line);
   });
 
-  loadScripts([
-    p5url(p5version),
-  ], () => {
+  let librariesToInclude = [
+    p5url(p5version)].concat(libs);
+  loadScripts(librariesToInclude, () => {
     document.body.appendChild(sketchScript);
     if (document.readyState === 'complete') {
       new global.p5();

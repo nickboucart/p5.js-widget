@@ -15,7 +15,8 @@ interface Props {
   baseSketchURL: string,
   timestamp: number,
   maxRunTime: number,
-  onError: PreviewFrame.ErrorReporter
+  onError: PreviewFrame.ErrorReporter,
+  libs?: string[],
 }
 
 interface State {
@@ -57,7 +58,8 @@ export default class Preview extends PureComponent<Props, State> {
       frame.startSketch(content, this.props.p5version, this.props.maxRunTime,
                         LOOP_CHECK_FUNC_NAME,
                         this.props.baseSketchURL,
-                        this.props.onError);
+                        this.props.onError,
+                        this.props.libs);
     });
     this.refs.container.appendChild(iframe);
     this._iframe = iframe;

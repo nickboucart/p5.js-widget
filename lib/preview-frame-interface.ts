@@ -16,5 +16,5 @@ export interface ErrorReporter {
 export interface Runner extends Window {
   startSketch: (sketch: string, p5version: string, maxRunTime: number,
                 loopCheckFuncName: string, baseURL: string,
-                errorCb: ErrorReporter) => void
+                errorCb: ErrorReporter, libs?: string[]) => void
 }

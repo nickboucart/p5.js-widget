@@ -102,6 +102,7 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
   let p5version = el.getAttribute('data-p5-version');
   let maxRunTime = parseInt(el.getAttribute('data-max-run-time'));
   let autoplay = el.hasAttribute('data-autoplay');
+  let libs = el.getAttribute('data-extra-libs');
   let url;
   let qsArgs = [
     'id=' + encodeURIComponent(el.getAttribute('data-id'))
@@ -135,6 +136,10 @@ function replaceScriptWithWidget(el: HTMLScriptElement) {
 
   if (autoplay) {
     qsArgs.push('autoplay=on');
+  }
+
+  if (libs) {
+    qsArgs.push('libs=' + encodeURIComponent(libs));
   }
 
   if (el.src && el.textContent && el.textContent.trim()) {
